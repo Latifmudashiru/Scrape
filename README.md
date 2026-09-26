@@ -8,7 +8,7 @@ A full-stack lead generation and outreach CRM I built and use day-to-day for my 
 ## What it does
 
 **Lead scraping**
-- **Google Places**: searches for businesses by niche and location through the official Google Places API. A headless-browser fallback exists for local development only (see [Responsible use](#responsible-use--compliance)).
+- **Google Maps**: searches for businesses by niche and location using a headless-browser scraper (Puppeteer). An official Google Places API integration is also built and is used automatically when an API key is configured (see [Responsible use](#responsible-use--compliance)).
 - **Smart location expansion**: when one area runs dry, an LLM suggests nearby towns and boroughs and the scraper works through them as a queue until the target lead count is hit.
 - **Companies House enrichment**: looks up each UK business on Companies House to find its active directors and verify it matches the target niche.
 - **Other sources**: YouTube channel analysis (Data API), Skool and Whop marketplace scraping, and Instagram lead discovery.
@@ -34,7 +34,7 @@ The tool is built for UK B2B prospecting, and how it's used matters as much as w
 - **Opt-out on every message**, and opt-outs are honoured permanently.
 - **Personal data:** director names from Companies House are personal data under UK GDPR. They're processed on a legitimate-interests basis, kept to what's needed for outreach, and deleted when no longer needed.
 
-**Data sources.** Google Maps data comes through the official Places API. Automated scraping of Google Maps and Google Search is against Google's Terms of Service, so the headless-browser fallback is kept for local development only and shouldn't be used in production. Directors come from Companies House public records.
+**Data sources.** Business listings currently come from a headless-browser scraper of Google Maps. Automated scraping conflicts with Google's Terms of Service, so the app also includes a Google Places API integration: setting `GOOGLE_PLACES_API_KEY` switches the scraper to the official API with no code changes. Moving production onto it is the top item on the roadmap. Directors come from Companies House public records.
 
 These rules are currently followed as process; they aren't yet enforced in code. See the roadmap below.
 
@@ -78,10 +78,10 @@ You'll need a Supabase project with `leads`, `crm_users`, and `email_templates` 
 
 This started as a personal tool built for speed, so some parts are pragmatic rather than production-hardened. Next up:
 
+- Move production lead search onto the official Google Places API (already implemented; it's a configuration switch) and retire the headless Google Maps scraper.
 - Move auth to Supabase Auth with row-level security.
 - Enforce the compliance rules in code:
   - automatic TPS/CTPS screening before a lead enters the call queue
   - flag likely sole traders (no Companies House match) and block them from email/SMS
   - a suppression list so opted-out contacts can't be re-added or messaged
-- Remove the headless Google Maps fallback in favour of the Places API only.
 - Switch Companies House lookups to the official Companies House API.
