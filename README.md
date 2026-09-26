@@ -2,7 +2,8 @@
 
 A full-stack lead generation and outreach CRM I built and use day-to-day for my agency, GMT Solutions. It finds local businesses, identifies their decision-makers, and manages them through a sales pipeline, from first contact to booked call.
 
-> Screenshots coming soon.
+<img width="1916" height="980" alt="image" src="https://github.com/user-attachments/assets/e4c14365-be6a-4ddb-84ae-22325e242b9b" />
+
 
 ## What it does
 
