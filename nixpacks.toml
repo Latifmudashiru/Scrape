@@ -1,0 +1,8 @@
+[phases.setup]
+  nixPkgs = ["nodePackages.npm", "chromium", "glib", "nss", "nspr", "atk", "at-spi2-atk", "cups", "libdrm", "dbus", "gconf", "libxcomposite", "libxdamage", "libxext", "libxfixes", "libxrandr", "libxrender", "pango", "cairo", "libxft"]
+
+[phases.build]
+  cmds = ["npm run build"]
+
+[phases.start]
+  cmd = "npm run start"
